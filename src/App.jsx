@@ -1,66 +1,17 @@
 import { useEffect, useState } from "react";
 import fetchApiData from "./utils/fetchApiData";
+import CreateRecipe from "./components/CreateRecipe"; // Martin
+import RecipeDetails from "./components/RecipeDetails"; // Elias
+
+import Rating from "./components/Rating"; // Rating component import (ozay)
 
 function App() {
 	// Lista med objekt
 	const [recipeList, setRecipeList] = useState([]);
+	const [isEdit, setIsEdit] = useState(false); // Martin
 	const [activeId, setActiveId] = useState(null)
+	const [currentRecipe, setCurrentRecipe] = useState(null);
 
-	// Så här ser objektet ut
-
-	// 	 "dateModified": null,
-	//   "idMeal": "",
-	//   "strArea": "",
-	//   "strCategory": "",
-	//   "strCreativeCommonsConfirmed": null,
-	//   "strDrinkAlternate": null,
-	//   "strImageSource": null,
-	//   "strIngredient1": "",
-	//   "strIngredient2": "",
-	//   "strIngredient3": "",
-	//   "strIngredient4": "",
-	//   "strIngredient5": "",
-	//   "strIngredient6": "",
-	//   "strIngredient7": "",
-	//   "strIngredient8": "",
-	//   "strIngredient9": "",
-	//   "strIngredient10": "",
-	//   "strIngredient11": "",
-	//   "strIngredient12": "",
-	//   "strIngredient13": "",
-	//   "strIngredient14": "",
-	//   "strIngredient15": "",
-	//   "strIngredient16": "",
-	//   "strIngredient17": "",
-	//   "strIngredient18": "",
-	//   "strIngredient19": "",
-	//   "strIngredient20": "",
-	//   "strInstructions": "",
-	//   "strMeal": "",
-	//   "strMealThumb": "",
-	//   "strMeasure1": "",
-	//   "strMeasure2": "",
-	//   "strMeasure3": "",
-	//   "strMeasure4": "",
-	//   "strMeasure5": "",
-	//   "strMeasure6": "",
-	//   "strMeasure7": "",
-	//   "strMeasure8": "",
-	//   "strMeasure9": "",
-	//   "strMeasure10": "",
-	//   "strMeasure11": "",
-	//   "strMeasure12": "",
-	//   "strMeasure13": "",
-	//   "strMeasure14": "",
-	//   "strMeasure15": "",
-	//   "strMeasure16": "",
-	//   "strMeasure17": "",
-	//   "strMeasure18": "",
-	//   "strMeasure19": "",
-	//   "strMeasure20": "",
-	//   "strSource": "",
-	//   "strTags": "",
-	//   "strYoutube": ""
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -70,6 +21,38 @@ function App() {
 		fetchData();
 	}, []);
 
+// ozay
+	const handleRatingUpdate = () => {
+		// Re-render the component by updating the state
+		setRecipeList([...recipeList]);
+	};
+
+// Martin
+const handleSave = (newRecipe) => {
+    if (isEdit) {
+      // Uppdatera det befintliga receptet
+      const updatedRecipes = recipeList.map((recipe) =>
+        recipe.idMeal === currentRecipe.idMeal
+          ? { ...recipe, ...newRecipe }
+          : recipe
+      );
+      setRecipeList(updatedRecipes);
+    } else {
+      // Lägg till ett nytt recept
+      setRecipeList([
+        ...recipeList,
+        { ...newRecipe, idMeal: performance.now().toString() },
+      ]);
+    }
+    setIsEdit(false);
+    setCurrentRecipe(null);
+  };
+
+  const handleEdit = (recipe) => {
+    setIsEdit(true);
+    setCurrentRecipe(recipe);
+  };
+
 	return (
 		<>
 			<div>
@@ -77,16 +60,20 @@ function App() {
 				<ul id="recipes"></ul>
 				{recipeList.length > 0 ? (
 					recipeList.map((recipe) => (
-						<div key={recipe.idMeal}>
+						<li key={recipe.idMeal}>
 							<p>{recipe.strMeal}</p>
 							{/* Each meal goes here, extract from components to perform CRUD, example would <TitleImage props={recipe.strMeal recipe.strMealThumb} > */}
-						</div>
+							{/* Call the Rating component ozay */}
+							<Rating mealId={recipe.idMeal} onRatingUpdate={handleRatingUpdate} />
+							<button onClick={() => handleEdit(recipe)}>Edit</button>
+						</li>
 					))
 				) : (
 					<p>No recipes found.</p>
 				)}
 			</div>
 
+			
 			<div>
 				<div>
 					<div>
@@ -110,24 +97,17 @@ function App() {
 					</div>
 				</div>
 			</div>
-			{/* Martin -- from and create */}
-			<div id="addnew">
-				<h2>Add new recipe</h2>
-				<form id="form">
-					<label htmlFor="input-title">Title</label>
-					<input type="text" id="input-title" placeholder="Title of the recipie" />
-					<label htmlFor="input-ingredients">Ingredients</label>
-					<input type="text" id="input-ingredients" placeholder="Comma seperated ingredients" />
-					<label htmlFor="input-instructions">Instructions:</label>
-					<input type="text" id="input-instructions" placeholder="Enter instructions" />
-					<label htmlFor="input-image">Image name:</label>
-					<input type="text" id="input-image" placeholder="image-5, image-6" />
-					<button type="submit" id="new-recipe-button">
-						Add now!
-					</button>
-					<small id="input-warning"></small>
-				</form>
+			
+			{/* Martin */}
+			<div>
+        <h2>{isEdit ? "Edit Recipe" : "Add New Recipe"}</h2>
+        <CreateRecipe
+          isEdit={isEdit}
+          recipe={currentRecipe}
+          onSave={handleSave}
+        />
 			</div>
+			
 		</>
 	);
 }

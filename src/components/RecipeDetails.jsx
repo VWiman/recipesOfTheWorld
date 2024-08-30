@@ -1,5 +1,6 @@
 // components/RecipeDetails.js
 import React from "react";
+import Ingredients from "./components/Ingredients"; //Viktor
 
 // RecipeDetails-komponenten ansvarar för att visa detaljerna om det valda receptet.
 // Den tar emot ett "recipe" objekt som en prop.
@@ -14,11 +15,7 @@ const RecipeDetails = ({ recipe }) => {
       <p>{recipe.description}</p>
       
       {/* Visa receptets ingredienser som en lista */}
-      <ul>
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>{ingredient}</li>
-        ))}
-      </ul>
+      <Ingredients/>
 
       {/* Visa tillagningsstegen i ordning */}
       <h3>Steps</h3>
