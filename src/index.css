@@ -1,0 +1,31 @@
+.meal-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.meal-item {
+    width: 200px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.meal-item img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.rating-section {
+    margin-top: 20px;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+}
+
+.stars span {
+    cursor: pointer;
+    font-size: 24px;
+    color: gold;
+}
