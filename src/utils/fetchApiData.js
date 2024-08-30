@@ -17,6 +17,7 @@ const fetchApiData = async (setRecipeList) => {
 					const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
 					const result = await response.json();
 					if (result && result.meals) {
+						result.meals[0].rating = 0;
 						recipes.push(result.meals[0]);
 					}
 				} catch (error) {

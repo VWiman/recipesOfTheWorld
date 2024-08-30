@@ -65,6 +65,7 @@ function App() {
 	useEffect(() => {
 		const fetchData = async () => {
 			await fetchApiData(setRecipeList);
+			console.log(recipeList)
 		};
 		fetchData();
 	}, []);
@@ -93,10 +94,11 @@ function App() {
 							<h1 id="display-title">Title</h1>
 						</div>
 						{/* <!-- Stars and rating code start ozay --> */}
+						{/* ozay ratings */}
 						<div id="rating-container"></div>
 						{/* <!-- Stars and rating code end ozay --> */}
 						<div>
-							<Ingredients props={{recipeList, activeId}} />
+							{/* <Ingredients props={{recipeList, activeId}} /> */}
 						</div>
 						<div>
 							<h3>Instructions</h3>
@@ -108,6 +110,7 @@ function App() {
 					</div>
 				</div>
 			</div>
+			{/* Martin -- from and create */}
 			<div id="addnew">
 				<h2>Add new recipe</h2>
 				<form id="form">
