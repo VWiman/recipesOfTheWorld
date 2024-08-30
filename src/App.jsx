@@ -4,6 +4,7 @@ import fetchApiData from "./utils/fetchApiData";
 function App() {
 	// Lista med objekt
 	const [recipeList, setRecipeList] = useState([]);
+	const [activeId, setActiveId] = useState(null)
 
 	// Så här ser objektet ut
 
@@ -95,7 +96,7 @@ function App() {
 						<div id="rating-container"></div>
 						{/* <!-- Stars and rating code end ozay --> */}
 						<div>
-							<Ingredients />
+							<Ingredients props={{recipeList, activeId}} />
 						</div>
 						<div>
 							<h3>Instructions</h3>
