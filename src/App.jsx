@@ -70,8 +70,8 @@ function App() {
 
 	return (
 		<>
-			<div className="left">
-				<h3 className="recipe-header">recipes</h3>
+			<div>
+				<h3>recipes</h3>
 				<ul id="recipes"></ul>
 				{recipeList.length > 0 ? (
 					recipeList.map((recipe) => (
@@ -85,16 +85,16 @@ function App() {
 				)}
 			</div>
 
-			<div className="right">
-				<div className="inner-container-row">
-					<div className="inner-left">
-						<div className="rc-header">
+			<div>
+				<div>
+					<div>
+						<div>
 							<h1 id="display-title">Title</h1>
 						</div>
 						{/* <!-- Stars and rating code start ozay --> */}
 						<div id="rating-container"></div>
 						{/* <!-- Stars and rating code end ozay --> */}
-						<div className="rc-info">
+						<div>
 							<Ingredients />
 						</div>
 						<div>
@@ -102,21 +102,21 @@ function App() {
 							<p id="display-instructions">instructions</p>
 						</div>
 					</div>
-					<div className="rc-img">
+					<div>
 						<img />
 					</div>
 				</div>
 			</div>
-			<div className="addnew" id="addnew">
+			<div id="addnew">
 				<h2>Add new recipe</h2>
 				<form id="form">
-					<label for="input-title">Title</label>
+					<label htmlFor="input-title">Title</label>
 					<input type="text" id="input-title" placeholder="Title of the recipie" />
-					<label for="input-ingredients">Ingredients</label>
+					<label htmlFor="input-ingredients">Ingredients</label>
 					<input type="text" id="input-ingredients" placeholder="Comma seperated ingredients" />
-					<label for="input-instructions">Instructions:</label>
+					<label htmlFor="input-instructions">Instructions:</label>
 					<input type="text" id="input-instructions" placeholder="Enter instructions" />
-					<label for="input-image">Image name:</label>
+					<label htmlFor="input-image">Image name:</label>
 					<input type="text" id="input-image" placeholder="image-5, image-6" />
 					<button type="submit" id="new-recipe-button">
 						Add now!
