@@ -94,9 +94,8 @@ function App() {
 						{/* <!-- Stars and rating code start ozay --> */}
 						<div id="rating-container"></div>
 						{/* <!-- Stars and rating code end ozay --> */}
-						<div class="rc-info">
-							<h3>Ingredients</h3>
-							<p id="display-ingredients"></p>
+						<div className="rc-info">
+							<Ingredients />
 						</div>
 						<div>
 							<h3>Instructions</h3>
