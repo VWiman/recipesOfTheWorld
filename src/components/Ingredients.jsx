@@ -1,9 +1,9 @@
-// Viktors component
+// --- Viktors code ---
 export default function Ingredients({ props }) {
 	// Plocka ut recipeList, activeId från props
 	const { recipeList, activeId } = props;
 
-	// Skapa en lista för ingredients
+	// Skapa en lista för ingredienser
 	const ingredientsList = [];
 
 	// Hitta det aktuella receptet med hjälp av activeId
@@ -11,15 +11,15 @@ export default function Ingredients({ props }) {
 
 	// Kontrollera om ett recept hittas
 	if (currentRecipe) {
-		// Filtrera ut ingredienser och lägg till i ingredientsList
+		// Filtrera ut ingredienser/nycklar (vars nyckel börjar med "strIngredient") från objektet currentRecipe
 		Object.keys(currentRecipe)
-			.filter((key) => key.startsWith("strIngredient"))
+			.filter((key) => key.startsWith("strIngredient")) // Filtrera "keys" som börjar med "strIngredient" och placera dem i en array 
 			.forEach((ingredientKey) => {
-				// Hämta ingrediensvärdet
+				// För varje nyckel i den array vi skapat så hämtas ingrediensen med hjälp av nyckeln i ett forEach loop
 				const ingredient = currentRecipe[ingredientKey];
-				// Kontrollera att ingrediensen inte är tom
+				// Kontrollera att ingrediensen inte är tom eller null
 				if (ingredient) {
-					// Lägg till ingrediensen i ingredientsList
+					// Lägg till den icke-tomma ingrediensen i ingredientsList
 					ingredientsList.push(ingredient);
 				}
 			});
@@ -28,7 +28,7 @@ export default function Ingredients({ props }) {
 		console.warn("No recipe found with the given ID:", activeId);
 	}
 
-	// Returnera en lista med ingredienser eller ett meddelande om inga ingredienser hittas
+	// Returnera en lista med ingredienser eller ett meddelande om att inga ingredienser hittats
 	return (
 		<ul>
 			{ingredientsList.length > 0 ? (
