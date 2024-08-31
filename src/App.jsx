@@ -63,13 +63,14 @@ function App() {
 
 	return (
 		<>
-			<div>
+			<div className="main-content">
+				<div className="left">
 				<h3>recipes</h3>
 				<ul id="recipes">
 					{recipeList.length > 0 ? (
 						recipeList.map((recipe) => (
 							<li key={recipe.idMeal} onClick={() => handleClickItem(recipe)}>
-								<p>{recipe.strMeal}</p>
+								<h4>{recipe.strMeal}</h4>
 								{/* Each meal goes here, extract from components to perform CRUD, example would <TitleImage props={recipe.strMeal recipe.strMealThumb} > */}
 								{/* Call the Rating component ozay */}
 								<Rating mealId={recipe.idMeal} onRatingUpdate={handleRatingUpdate} />
@@ -87,15 +88,15 @@ function App() {
 						<p>No recipes found.</p>
 					)}
 				</ul>
-			</div>
+				</div>
 
-			<div>
-				<div>
+				<div className="right">
+				<div className="inner-container-row">
 					<div>
 						{/* <!-- Stars and rating code start ozay --> */}
 						{/* ozay ratings */}
 						<div id="rating-container"></div>
-						{/* <!-- Stars and rating code end ozay --> */}
+							{/* <!-- Stars and rating code end ozay --> */}
 						<div>
 							{activeId ? (
 								<RecipeDetails recipeList={recipeList} activeId={activeId} currentRecipe={currentRecipe} />
@@ -108,10 +109,11 @@ function App() {
 						<img />
 					</div>
 				</div>
+				</div>
 			</div>
 
 			{/* Martin */}
-			<div>
+			<div className="addnew">
 				<h2>{isEdit ? "Edit Recipe" : "Add New Recipe"}</h2>
 				<CreateRecipe isEdit={isEdit} recipe={currentRecipe} onSave={handleSave} />
 			</div>

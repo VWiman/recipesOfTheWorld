@@ -1,3 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+    --width: 1280px;
+}
+
+* {
+  font-family: "Work Sans", sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+}
+body p {
+    margin: 5px 0px;
+}
+.main {
+  max-width: var(--width);
+  margin: 20px auto;
+  width: 100%;
+}
+h3 {
+    margin: 10px 0px;
+}
+
+.main-content {
+    display: flex;
+    gap: 10px;
+}
+
+
+.left {
+    width: 30%;
+    max-height: 800px;
+    overflow-y: scroll;
+    border: solid 1px #e4e4e4;
+    background-color: #bb0005;
+}
+.right {
+    width: 70%;
+    border: solid 1px #e4e4e4;
+    padding: 20px;
+}
+
+.inner-container-row {
+    display: flex;
+    gap: 5px;
+}
+
+ul#recipes {
+    list-style: none;
+    padding-inline-start: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+ul#recipes li {
+    cursor: pointer;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: #f7f7f7;
+}
+ul#recipes li:hover {
+    background-color: #ffffff;
+}
+
+.left h4 {
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.left h3 {
+    font-size: 20px;
+    line-height: 20px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    margin-left: 15px;
+    color: #fff;
+}
+
+.addnew {
+    width: 100%;
+    max-width: var(--width);
+    margin: 60px auto;
+    border: solid 1px #e4e4e4;
+}
+
+.addnew h2 {
+    padding-left: 20px;
+}
+.addnew form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.addnew form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+.addnew form input[type="text"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.addnew button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .meal-list {
     display: flex;
     flex-wrap: wrap;
