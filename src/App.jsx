@@ -58,57 +58,54 @@ function App() {
 		console.log("Updated list after deletion", updateList);
 		setRecipeList(updateList);
 		setActiveId(null);
-		setCurrentRecipe(null)
+		setCurrentRecipe(null);
 	};
 
 	return (
 		<>
+			<h1>Recipes Of The World</h1>
 			<div className="main-content">
 				<div className="left">
-				<h3>recipes</h3>
-				<ul id="recipes">
-					{recipeList.length > 0 ? (
-						recipeList.map((recipe) => (
-							<li key={recipe.idMeal} onClick={() => handleClickItem(recipe)}>
-								<h4>{recipe.strMeal}</h4>
-								{/* Each meal goes here, extract from components to perform CRUD, example would <TitleImage props={recipe.strMeal recipe.strMealThumb} > */}
-								{/* Call the Rating component ozay */}
-								<Rating mealId={recipe.idMeal} onRatingUpdate={handleRatingUpdate} />
-								<button onClick={() => handleEdit(recipe)}>Edit</button>
-								<button
-									onClick={(e) => {
-										e.stopPropagation();
-										handleDelete(recipe.idMeal);
-									}}>
-									Delete
-								</button>
-							</li>
-						))
-					) : (
-						<p>No recipes found.</p>
-					)}
-				</ul>
+					<h3>recipes</h3>
+					<ul id="recipes">
+						{recipeList.length > 0 ? (
+							recipeList.map((recipe) => (
+								<li key={recipe.idMeal} onClick={() => handleClickItem(recipe)}>
+									<h4>{recipe.strMeal}</h4>
+									{/* Each meal goes here, extract from components to perform CRUD, example would <TitleImage props={recipe.strMeal recipe.strMealThumb} > */}
+									{/* Call the Rating component ozay */}
+									<Rating mealId={recipe.idMeal} onRatingUpdate={handleRatingUpdate} />
+									<button onClick={() => handleEdit(recipe)}>Edit</button>
+									<button
+										onClick={(e) => {
+											e.stopPropagation();
+											handleDelete(recipe.idMeal);
+										}}>
+										Delete
+									</button>
+								</li>
+							))
+						) : (
+							<p>No recipes found.</p>
+						)}
+					</ul>
 				</div>
 
 				<div className="right">
-				<div className="inner-container-row">
-					<div>
-						{/* <!-- Stars and rating code start ozay --> */}
-						{/* ozay ratings */}
-						<div id="rating-container"></div>
-							{/* <!-- Stars and rating code end ozay --> */}
+					<div className="inner-container-row">
 						<div>
-							{activeId ? (
+							{/* <!-- Stars and rating code start ozay --> */}
+							{/* ozay ratings */}
+							<div id="rating-container"></div>
+							{/* <!-- Stars and rating code end ozay --> */}
+							<div>
 								<RecipeDetails recipeList={recipeList} activeId={activeId} currentRecipe={currentRecipe} />
-							) : (
-								<p></p>
-							)}
+							</div>
+						</div>
+						<div>
+							<img />
 						</div>
 					</div>
-					<div>
-						<img />
-					</div>
-				</div>
 				</div>
 			</div>
 

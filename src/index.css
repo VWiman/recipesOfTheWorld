@@ -29,6 +29,7 @@ h3 {
 }
 
 .main-content {
+    max-height: 800px;
     display: flex;
     gap: 10px;
 }
@@ -43,8 +44,10 @@ h3 {
 }
 .right {
     width: 70%;
+    max-height: 800px;
     border: solid 1px #e4e4e4;
     padding: 20px;
+    overflow: scroll;
 }
 
 .inner-container-row {
@@ -139,7 +142,7 @@ ul#recipes li:hover {
 }
 
 .meal-item img {
-    width: 100%;
+    max-width: 100%;
     border-radius: 8px;
 }
 
@@ -156,4 +159,9 @@ ul#recipes li:hover {
     cursor: pointer;
     font-size: 24px;
     color: gold;
+}
+
+.inner-container-row img {
+ max-width: 50%;
+ border-radius: 5px;
 }
