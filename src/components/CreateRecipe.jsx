@@ -6,6 +6,8 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
   const [instructions, setInstructions] = useState("");
   const [image, setImage] = useState("");
 
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     if (isEdit && recipe) {
       setTitle(recipe.strMeal || "");
@@ -24,10 +26,29 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
       setInstructions("");
       setImage("");
     }
+    setErrors({}); // Rensa eventuella tidigare felmeddelanden
   }, [isEdit, recipe]);
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!title.trim()) newErrors.title = "Title is required";
+    if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
+    if (!instructions.trim())
+      newErrors.instructions = "Instructions are required";
+    if (!image.trim()) newErrors.image = "Image URL is required";
+
+    setErrors(newErrors);
+
+    // Returnerar true om inga fel finns
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateForm()) return; // Avbryt om formuläret inte är giltigt
+
     const newRecipe = {
       strMeal: title,
       strInstructions: instructions,
@@ -36,6 +57,7 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
         .split(",")
         .map((ingredient) => ingredient.trim()),
     };
+
     onSave(newRecipe);
   };
 
@@ -49,6 +71,8 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+      {errors.title && <p style={{ color: "red" }}>{errors.title}</p>}
+
       <label htmlFor="input-ingredients">Ingredients</label>
       <input
         type="text"
@@ -57,6 +81,10 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
         value={ingredients}
         onChange={(e) => setIngredients(e.target.value)}
       />
+      {errors.ingredients && (
+        <p style={{ color: "red" }}>{errors.ingredients}</p>
+      )}
+
       <label htmlFor="input-instructions">Instructions:</label>
       <input
         type="text"
@@ -65,6 +93,10 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
         value={instructions}
         onChange={(e) => setInstructions(e.target.value)}
       />
+      {errors.instructions && (
+        <p style={{ color: "red" }}>{errors.instructions}</p>
+      )}
+
       <label htmlFor="input-image">Image URL:</label>
       <input
         type="text"
@@ -73,6 +105,8 @@ function CreateRecipe({ isEdit, recipe, onSave }) {
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
+      {errors.image && <p style={{ color: "red" }}>{errors.image}</p>}
+
       <button type="submit">{isEdit ? "Save" : "Add"}</button>
     </form>
   );
